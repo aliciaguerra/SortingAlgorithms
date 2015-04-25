@@ -24,4 +24,16 @@ p:= partition(A, low, high)
 quicksort(A, low, p-1)
 quicksort(A, p+1, high)
 ```
-Sorting the entire array is accomplished by calling quicksort(A, 1, length(A)).
+Sorting the entire array is accomplished by calling quicksort(A, 1, length(A)). The partition operation is step 2 from the
+algorithm description above:
+```
+//low is the index of the leftmost element of ther subarray
+//high is the index of the rightmost element of the subarray
+partition(A, low, high)
+pivotIndex := choosePivot(A, low, high)
+pivotValue := A[pivotIndex]
+//put the chosen pivot at A[high]
+swap A[pivotIndex] and A[high]
+storeIndex:= low
+
+```
