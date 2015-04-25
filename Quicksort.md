@@ -35,5 +35,23 @@ pivotValue := A[pivotIndex]
 //put the chosen pivot at A[high]
 swap A[pivotIndex] and A[high]
 storeIndex:= low
-
+//Compare remaining array elements against pivotValue=A[high]
+for i from low to high-1, inclusive
+if A[i] <= pivotValue
+swap A[i] and A[storeIndex]
+storeIndex := storeIndex+1
+swap A[storeIndex] and A[high] //Move pivot to its final place
+return storeIndex
 ```
+This is the in-place partition algorithm. It partitions the portion of the array between indexes low and high, inclusively,
+by moving all elements less than A[pivotIndex] before the pivot, and the greater elements after it. In the process it also
+finds the final position for the pivot element, which it returns. It temporarily moves the pivot to the end of the subarray,
+so that it does not get in the way. Because it only uses exchanges, the final list has the same elements as the original list.
+Notice that an element may be echanged multiple times before reaching its final place. Also, in case of pivot duplicates in
+the input array, they can be spread across the right subarray, in any order. This doesn't represent a partitioning failure,
+as further sorting will reposition and finally "glue them together. <br>
+
+Each recursive call to the combined quicksort function reduces the size of the array being sorted by at least one element,
+since in each invocation the elemtn at storeIndex is placed in its final position. Therefore, this algorithm is guaranteed to
+terminate recursion after at most n recursive calls. However, since partition reorders elements within a partition, this 
+version of quicksort is not a stable sort.
